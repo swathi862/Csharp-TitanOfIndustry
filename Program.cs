@@ -96,73 +96,80 @@ namespace industry_titan
             ChimkenNugget.HireEmployee(foodEmployee4);
             Blech.HireEmployee(steelEmployee3);
 
+            bool exit = false;
+            while(exit == false){
+                Console.WriteLine("\nWelcome to H.E. Pennypacker Industries!");
+                Console.WriteLine("1. View employees at a factory");
+                Console.WriteLine("2. Hire a new employee");
+                Console.WriteLine("3. Exit\n");
 
+                string response = Console.ReadLine();
 
-            Console.WriteLine("\nWelcome to H.E. Pennypacker Industries!");
-            Console.WriteLine("1. View employees at a factory");
-            Console.WriteLine("2. Hire a new employee\n");
+                if(response == "1"){
+                    Console.WriteLine("\nSelect a factory");
+                    Console.WriteLine("1. Automobiles");
+                    Console.WriteLine("2. Chicken Nuggets");
+                    Console.WriteLine("3. Steel\n");
 
-            string response = Console.ReadLine();
+                    string factoryResponse = Console.ReadLine();
 
-            if(response == "1"){
-                Console.WriteLine("\nSelect a factory");
-                Console.WriteLine("1. Automobiles");
-                Console.WriteLine("2. Chicken Nuggets");
-                Console.WriteLine("3. Steel\n");
-
-                string factoryResponse = Console.ReadLine();
-
-                if(factoryResponse == "1"){
-                    CarsRUs.ListEmployees();
+                    if(factoryResponse == "1"){
+                        CarsRUs.ListEmployees();
+                    }
+                    else if (factoryResponse == "2"){
+                        ChimkenNugget.ListEmployees();
+                    }
+                    else if(factoryResponse == "3"){
+                        Blech.ListEmployees();
+                    }
                 }
-                else if (factoryResponse == "2"){
-                    ChimkenNugget.ListEmployees();
+
+                else if (response == "2"){
+                    Console.WriteLine("\n Which factory is this worker being hired in? \n 1.Auto\n 2.Food \n 3.Steel");
+                    string placeOfWork = Console.ReadLine();
+                    Console.WriteLine("\nAdd Employee Details");
+                    Console.WriteLine("Enter the employee's full name.");
+                    string employeeName = Console.ReadLine();
+                    Console.WriteLine("Enter the employee's rate of pay.");
+                    double pay = Convert.ToDouble(Console.ReadLine());
+
+
+                    if(placeOfWork == "1"){
+                        AutoWorker employee = new AutoWorker(){
+                            Name = employeeName,
+                            DateHired = DateTime.Now,
+                            PayRate = pay
+                        };
+
+                        CarsRUs.HireEmployee(employee);
+
+                    }
+                    else if (placeOfWork == "2"){
+                        FoodProcessor employee = new FoodProcessor(){
+                            Name = employeeName,
+                            DateHired = DateTime.Now,
+                            PayRate = pay
+                        };
+
+                        ChimkenNugget.HireEmployee(employee);
+
+                    }
+                    else if (placeOfWork == "3"){
+                        SteelWorker employee = new SteelWorker(){
+                            Name = employeeName,
+                            DateHired = DateTime.Now,
+                            PayRate = pay
+                        };
+
+                        Blech.HireEmployee(employee);
+
+                    }
+                    
                 }
-                else if(factoryResponse == "3"){
-                    Blech.ListEmployees();
+                else if(response == "3"){
+                    Console.WriteLine("Thanks for visiting!");
+                    exit = true;
                 }
-            }
-
-            else if (response == "2"){
-                Console.WriteLine("\nAdd Employee Details");
-                Console.WriteLine("Enter the employee's full name.");
-                string employeeName = Console.ReadLine();
-                Console.WriteLine("Enter the employee's rate of pay.");
-                double pay = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("\n Which factory is this worker being hired in? \n 1.Auto\n 2.Food \n 3.Steel");
-                string placeOfWork = Console.ReadLine();
-
-                if(placeOfWork == "1"){
-                    AutoWorker employee = new AutoWorker(){
-                        Name = employeeName,
-                        DateHired = DateTime.Now,
-                        PayRate = pay
-                    };
-
-                    CarsRUs.HireEmployee(employee);
-
-                }
-                else if (placeOfWork == "2"){
-                    FoodProcessor employee = new FoodProcessor(){
-                        Name = employeeName,
-                        DateHired = DateTime.Now,
-                        PayRate = pay
-                    };
-
-                    ChimkenNugget.HireEmployee(employee);
-
-                }
-                else if (placeOfWork == "3"){
-                    SteelWorker employee = new SteelWorker(){
-                        Name = employeeName,
-                        DateHired = DateTime.Now,
-                        PayRate = pay
-                    };
-
-                    Blech.HireEmployee(employee);
-
-                }
-                
             }
 
             Console.WriteLine();
